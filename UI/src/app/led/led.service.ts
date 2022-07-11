@@ -9,6 +9,6 @@ export class LedService {
     constructor(private http: HttpClient) {}
 
     getLedState(): Observable<boolean> {
-        return this.http.get<boolean>("http://localhost:3001/api/led");
+        return this.http.get<boolean>("http://localhost:3001/getLed");
     }
 }

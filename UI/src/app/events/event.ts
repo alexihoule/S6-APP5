@@ -1,4 +1,4 @@
 export interface Event {
-    action: string,
-    address: string
+    address: string,
+    status: string
 }
