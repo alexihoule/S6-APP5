@@ -29,7 +29,7 @@ void setup()
 {
   // LED control
   pinMode(LED_pin, OUTPUT);
-  digitalWrite(LED_pin, HIGH);
+  digitalWrite(LED_pin, LOW);
   Particle.function("toggleLED", toggle_LED);
 
   // Beacon scanner functions
