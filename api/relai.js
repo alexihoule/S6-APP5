@@ -16,6 +16,10 @@ const device_ID = 'e00fce68285fad1dccfa7f4a'
 var event_status = ''
 var event_name = ''
 
+const express = require('express');
+const app = express();
+const port = 3002;
+
 particle.getEventStream({ deviceId: device_ID, auth: auth_token }).then(function (stream) {
     stream.on('event', function (data) {
         event_status = data.data.toString();
@@ -27,4 +31,8 @@ particle.getEventStream({ deviceId: device_ID, auth: auth_token }).then(function
             //console.log('Event published.');
         };
     });
+});
+
+app.listen(port, () => {
+    console.log('Relay server started (localhost:' + port +')...');
 });

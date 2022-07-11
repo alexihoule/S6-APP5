@@ -10,6 +10,7 @@ void onCallback(Beacon &beacon, callback_type type)
   Particle.publish(address, status);
 }
 
+//Function that toggle the LED in off/on switches, is integrated within the Particle Cloud system
 bool toggle_LED(String command)
 {
   if (!LED_state)
@@ -25,6 +26,7 @@ bool toggle_LED(String command)
   return LED_state;
 }
 
+//Function to make the configuration of the Argon
 void setup()
 {
   // LED control
