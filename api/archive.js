@@ -17,6 +17,7 @@ const port = 3000;
 
 app.use(cors());
 
+//When the broker is connecting we need to subscribe to the 2 main topic of the system
 client.on('connect', () => {
     client.subscribe('houa2909/In');
     client.subscribe('houa2909/Out');
@@ -29,6 +30,7 @@ client.on('connect', () => {
     });
 });
 
+//When the broker communicate we need to see which topic is it talking about and write the content appropriatly in the "database"
 client.on('message', (topic, message) => {
     switch (topic) {
         case 'houa2909/In':
@@ -42,8 +44,9 @@ client.on('message', (topic, message) => {
     }
 });
 
+//Write content into the "database" (a .txt file), could have been done using a MongoDB Database but easier and faster that way
 function write_data_to_file(address, status) {
-    var line =  address + ' : ' + status + '\n';
+    var line =  address + ' is ' + status + '\n';
     fs.appendFile(filename, line, err => {
         if (err) {
             console.error(err);
@@ -51,6 +54,7 @@ function write_data_to_file(address, status) {
     });
 };
 
+//API to send the content of the database to an API to be collected by a webapp
 app.get('/getEvents', function (req, res) {
     fs.readFile(filename, 'utf8', (err, data) => {
         if (err) {
@@ -62,7 +66,7 @@ app.get('/getEvents', function (req, res) {
             var rows = data.split('\n');
 
             for (let i = 0; i < rows.length - 1; i++) {
-                const element = rows[i].split(' : ');
+                const element = rows[i].split(' is ');
                 returnData[i] = { address: element[0], status: element[1] };
             }
 
