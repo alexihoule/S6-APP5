@@ -10,7 +10,7 @@ const filename = 'events-db.txt';
 
 const cors = require('cors');
 
-var express = require('express'); 
+var express = require('express');
 
 const app = express();
 const port = 3000;
@@ -22,10 +22,10 @@ client.on('connect', () => {
     client.subscribe('houa2909/In');
     client.subscribe('houa2909/Out');
 
-    //Delete database if exists
-    fs.exists(filename, function (exists) {
-        if (exists) {
-            //fs.unlinkSync(filename);
+    //Delete database
+    fs.writeFile(filename, '', err => {
+        if (err) {
+            console.log('Error while deleting database.');
         }
     });
 });
@@ -46,7 +46,7 @@ client.on('message', (topic, message) => {
 
 //Write content into the "database" (a .txt file), could have been done using a MongoDB Database but easier and faster that way
 function write_data_to_file(address, status) {
-    var line =  address + ' is ' + status + '\n';
+    var line = address + ' is ' + status + '\n';
     fs.appendFile(filename, line, err => {
         if (err) {
             console.error(err);
@@ -76,5 +76,5 @@ app.get('/getEvents', function (req, res) {
 });
 
 app.listen(port, () => {
-    console.log('Archive server started (localhost:' + port +')...');
+    console.log('Archive server started (localhost:' + port + ')...');
 });
