@@ -34,11 +34,11 @@ client.on('connect', () => {
 client.on('message', (topic, message) => {
     switch (topic) {
         case 'houa2909/In':
-            //console.log(message.toString(), 'is in.');
+            console.log(message.toString(), 'is in.');
             write_data_to_file(message.toString(), 'in');
             break;
         case 'houa2909/Out':
-            //console.log(message.toString(), 'is out.');
+            console.log(message.toString(), 'is out.');
             write_data_to_file(message.toString(), 'out');
             break;
     }

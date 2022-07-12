@@ -13,6 +13,8 @@ export class EventsComponent implements OnInit {
     
     ngOnInit(): void {
         this.getEvents();
+
+        setInterval(() => this.getEvents(),1000);
     }
 
     getEvents(): void {
