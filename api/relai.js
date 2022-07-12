@@ -20,6 +20,7 @@ const express = require('express');
 const app = express();
 const port = 3002;
 
+//Recoit tous les events du Cloud et publie ceux qui nous intéressent sur le Broker
 particle.getEventStream({ deviceId: device_ID, auth: auth_token }).then(function (stream) {
     stream.on('event', function (data) {
         event_status = data.data.toString();

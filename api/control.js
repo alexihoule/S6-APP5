@@ -12,7 +12,7 @@ const app = express();
 const port = 3001;
 app.use(cors());
 
-//Mettre cette fonction dans une fonction quelconque venant du UI lorsqu'on appuie sur le bouton
+//Permet d'ouvrir l'interface getLEDState, appelle la fonction sur le Cloud pour activer ou désactiver la LED sur le Argon
 app.get('/getLEDState', function(req, res) {
     const particleFunction = particle.callFunction({ deviceId: device_ID, name: 'toggleLED', auth: auth_token });
     particleFunction.then(
